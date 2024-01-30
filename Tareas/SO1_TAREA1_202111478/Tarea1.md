@@ -21,7 +21,7 @@ El fin de la tarea es realizar una apliación web utilizando React, y desarrolla
 
 <ul>
     <li>Crear imagen del backend</li>
-    ![backend imagen](/Screenshots/Screenshot%20from%202024-01-30%2014-35-42.png)
+    ![backend imagen](/Screenshots/backimg.png)
 </ul>
 
 </div>
