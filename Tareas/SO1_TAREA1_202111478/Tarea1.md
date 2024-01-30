@@ -16,12 +16,18 @@ El fin de la tarea es realizar una apliación web utilizando React, y desarrolla
     <li>Código fuente: se encuentra en las carpetas backend y frontend</li>
     <li>Video explicativo: <a href="https://youtu.be/i4mTuKYac7M?si=AIJW7v8RVV9gOyt4"> Tarea 1 202111478 </a> </li>
 </ul>
-
+</div>
 <h2> Capturas de pantalla </h2>
 
-<ul>
-    <li>Crear imagen del backend</li>
-    ![backend imagen](/Screenshots/backimg.png)
-</ul>
-
-</div>
+- Crear imagen del backend
+![backend imagen](/Screenshots/backimg.png)
+- Crear imagen del frontend
+![frontend imagen](/Screenshots/frontimg.png)
+- Imagenes creadas de docker
+![docker imagenes](/Screenshots/dockimgs.png)
+- Contenedores de docker
+![docker contenedores](/Screenshots/dockcont.png)
+- Aplicacion 
+![aplicacion](/Screenshots/front1.png)
+- Aplicacion despues de presionar el boton
+![aplicacion after](/Screenshots/front2.png)
