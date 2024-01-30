@@ -20,14 +20,8 @@ El fin de la tarea es realizar una apliación web utilizando React, y desarrolla
 <h2> Capturas de pantalla </h2>
 
 - Crear imagen del backend
-![backend imagen](/Screenshots/backimg.png)
 - Crear imagen del frontend
-![frontend imagen](/Screenshots/frontimg.png)
 - Imagenes creadas de docker
-![docker imagenes](/Screenshots/dockimgs.png)
 - Contenedores de docker
-![docker contenedores](/Screenshots/dockcont.png)
 - Aplicacion 
-![aplicacion](/Screenshots/front1.png)
 - Aplicacion despues de presionar el boton
-![aplicacion after](/Screenshots/front2.png)
