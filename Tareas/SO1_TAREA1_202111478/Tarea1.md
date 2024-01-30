@@ -20,8 +20,19 @@ El fin de la tarea es realizar una apliación web utilizando React, y desarrolla
 <h2> Capturas de pantalla </h2>
 
 - Crear imagen del backend
+![Screenshot from 2024-01-30 14-35-42](https://github.com/Jpanaza1906/SO1_1S2024_202111478/assets/81275279/e46528e3-38d6-4096-a77e-c5ed1748fdd5)
+
 - Crear imagen del frontend
+![Screenshot from 2024-01-30 14-35-27](https://github.com/Jpanaza1906/SO1_1S2024_202111478/assets/81275279/1467eefc-579d-451e-99a1-d238620401bc)
+
 - Imagenes creadas de docker
+![Screenshot from 2024-01-30 14-36-33](https://github.com/Jpanaza1906/SO1_1S2024_202111478/assets/81275279/e5cac945-14ff-41e4-a19c-a6379c001700)
+
 - Contenedores de docker
-- Aplicacion 
+![Screenshot from 2024-01-30 14-36-54](https://github.com/Jpanaza1906/SO1_1S2024_202111478/assets/81275279/2b3967e0-956c-4714-ab52-1a7628431f48)
+
+- Aplicacion
+![Screenshot from 2024-01-30 14-37-24](https://github.com/Jpanaza1906/SO1_1S2024_202111478/assets/81275279/cb70911b-d97a-42da-aa7a-d43e473f4eba)
+
 - Aplicacion despues de presionar el boton
+![Screenshot from 2024-01-30 14-37-32](https://github.com/Jpanaza1906/SO1_1S2024_202111478/assets/81275279/1bafdfe2-fa9e-4726-b388-556548d13b9d)
