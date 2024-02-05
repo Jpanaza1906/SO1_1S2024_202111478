@@ -3,12 +3,23 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Header from './header';
+import CameraComponent from './camera';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Header/>
+    <div 
+      style={{
+        position: 'relative',
+        height: '100vh',
+        width: '100vw',
+        backgroundColor: '#a9cbe2',
+      }}
+    >
+      <Header/>
+      <CameraComponent/>
+    </div>
   </React.StrictMode>
 );
 
