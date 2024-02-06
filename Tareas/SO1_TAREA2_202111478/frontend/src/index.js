@@ -1,26 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
-import Header from './header';
-import CameraComponent from './camera';
+import reportWebVitals from './reportWebVitals';import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Index from './pages/index'
+import TablaImages from './pages/tabla';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <div 
-      style={{
-        position: 'relative',
-        height: '100vh',
-        width: '100vw',
-        backgroundColor: '#a9cbe2',
-      }}
-    >
-      <Header/>
-      <CameraComponent/>
-    </div>
-  </React.StrictMode>
+  <div>
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<Index />} />
+        <Route path='/index' element={<Index />} />
+        <Route path='/images' element={<TablaImages />} />
+      </Routes>
+    </BrowserRouter>  </div>
 );
 
 // If you want to start measuring performance in your app, pass a function
