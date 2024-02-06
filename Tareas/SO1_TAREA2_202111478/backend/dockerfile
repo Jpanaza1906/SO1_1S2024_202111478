@@ -1,0 +1,18 @@
+#Se define la imagen base de Node.js
+FROM node:18.16.2-alpine
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 5000
+
+CMD ["node", "src/index.js"]
+
+# Notes
+# docker build -t backendt2so1
+# docker run -p 5000:5000 backendt2so1

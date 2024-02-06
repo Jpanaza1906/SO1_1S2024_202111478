@@ -1,11 +1,16 @@
 import Header from "../components/header";
 import CameraComponent from "../components/camera";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import './index.css'
-const Index = () =>{
+const Index = () => {
     return (
-        <div className="back">
-            <Header/>
-            <CameraComponent/>
+        <div className="main">
+            <Header />
+            <div className="back">
+                <CameraComponent />
+                <ToastContainer />
+            </div>
         </div>
     );
 }
