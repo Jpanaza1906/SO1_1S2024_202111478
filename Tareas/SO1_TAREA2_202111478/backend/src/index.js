@@ -18,7 +18,7 @@ app.use(express.json());
 //mongodb://localhost:27017/clase2
 
 // Conexión a la base de datos
-mongoose.connect('mongodb://localhost:27017/tarea2');
+mongoose.connect('mongodb://mongo:27017/tarea2');
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'Error de conexion a la base de datos:'));
