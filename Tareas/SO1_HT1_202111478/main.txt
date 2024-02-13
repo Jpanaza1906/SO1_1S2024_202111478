@@ -1,0 +1,54 @@
+package main
+
+import (
+	"context"
+	"embed"
+	"fmt"
+	"os/exec"
+	"time"
+
+	"github.com/wailsapp/wails/v2"
+	"github.com/wailsapp/wails/v2/pkg/options"
+	"github.com/wailsapp/wails/v2/pkg/options/assetserver"
+)
+
+//go:embed all:frontend/dist
+var assets embed.FS
+
+func main() {
+	// Create application with options
+	err := wails.Run(&options.App{
+		Title:            "myproject",
+		Width:            1024,
+		Height:           768,
+		AssetServer:      &assetserver.Options{Assets: assets},
+		BackgroundColour: &options.RGBA{R: 0, G: 0, B: 0, A: 1},
+		OnStartup:        startup,
+	})
+
+	if err != nil {
+		println("Error:", err.Error())
+	}
+}
+
+func startup(ctx context.Context) {
+	// Lanzar un goroutine que ejecute la función cada n segundos
+	go func() {
+		interval := 5 // segundos
+		ticker := time.NewTicker(time.Second * time.Duration(interval))
+		defer ticker.Stop()
+
+		for range ticker.C {
+			fmt.Println("DATOS OBTENIDOS DESDE EL MODULO:")
+			fmt.Println("")
+
+			cmd := exec.Command("sh", "-c", "cat /proc/modulo_ram")
+			out, err := cmd.CombinedOutput()
+			if err != nil {
+				fmt.Println(err)
+			}
+			output := string(out[:])
+			fmt.Println(output)
+		}
+	}()
+}
