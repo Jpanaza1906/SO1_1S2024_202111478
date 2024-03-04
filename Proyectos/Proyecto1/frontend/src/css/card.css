@@ -1,0 +1,47 @@
+.card {
+    width: 100%;
+    height: 360px;
+    margin: 0 auto;
+    background-color: #F8FBFE;
+    border-radius: 8px;
+    z-index: 1;
+   }
+   
+   .tools {
+    display: flex;
+    align-items: center;
+    padding: 9px;
+   }
+   
+   .circle {
+    padding: 0 4px;
+   }
+
+   .titulo{
+    font-size: 20px;
+    font-weight: bold;
+    color: #011d2e;
+    padding: 1px 5px;
+   }
+   
+   .box {
+    display: inline-block;
+    align-items: center;
+    width: 10px;
+    height: 10px;
+    padding: 1px;
+    border-radius: 50%;
+   }
+   
+   .red {
+    background-color: #00416A;
+   }
+   
+   .yellow {
+    background-color: #2e78a7;
+   }
+   
+   .green {
+    background-color: #72b1d8;
+   }
+   
