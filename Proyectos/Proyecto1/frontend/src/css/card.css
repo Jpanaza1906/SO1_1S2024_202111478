@@ -1,9 +1,11 @@
 .card {
+    top: 0;
     width: 100%;
-    height: 360px;
-    margin: 0 auto;
-    background-color: #F8FBFE;
+    height: 370px;
+    margin-bottom: 20px;
+    background: transparent;
     border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
     z-index: 1;
    }
    
@@ -20,7 +22,7 @@
    .titulo{
     font-size: 20px;
     font-weight: bold;
-    color: #011d2e;
+    color: #ffffff;
     padding: 1px 5px;
    }
    
@@ -34,14 +36,14 @@
    }
    
    .red {
-    background-color: #00416A;
+    background-color: #000000;
    }
    
    .yellow {
-    background-color: #2e78a7;
+    background-color: #141414;
    }
    
    .green {
-    background-color: #72b1d8;
+    background-color: #202020;
    }
    

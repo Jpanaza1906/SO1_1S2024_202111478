@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 
-const PieChart = ({ data, labels, colors }) => {
-  const chartRef = useRef(null);
-  let myChart = null;
+const PieChart = ({ data, labels, colors,title}) => {
+  let chartRef = useRef(null);
 
   useEffect(() => {
+    let myChart = null;
     if (chartRef.current && myChart) {
       myChart.destroy(); // Si el gráfico ya existe, destrúyelo
     }
@@ -16,6 +16,7 @@ const PieChart = ({ data, labels, colors }) => {
       data: {
         labels: labels,
         datasets: [{
+          label: title,
           data: data,
           backgroundColor: colors,
           borderColor: colors,
@@ -25,7 +26,20 @@ const PieChart = ({ data, labels, colors }) => {
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'top',
+            animatiom: false
+          },
+          title: {
+            display: true,
+            text: title
+          }
+        },
+        animation: {
+          duration: 0
+        }
       }
     });
     return () => {
@@ -33,7 +47,7 @@ const PieChart = ({ data, labels, colors }) => {
         myChart.destroy(); // Asegúrate de destruir el gráfico al desmontar el componente
       }
     };
-  }, [data, labels, colors]);
+  }, [data, labels, colors,title]);
 
   return (
     <div>

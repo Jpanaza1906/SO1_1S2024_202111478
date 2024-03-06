@@ -1,76 +1,84 @@
-.navbar{
-  background: #191b1b
+.navbar {
+  background: #191b1b;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
-.brand{
+
+.brand {
   font-size: 1.5em;
   color: #ffffff;
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 2px;
 }
-.brand:hover{
+
+.brand:hover {
   font-size: 1.5em;
   color: #ffffff;
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 2px;
 }
+
 .btn {
-    font-size: 17px;
-    background: transparent;
-    border: none;
-    padding: 0.4em 1em;
-    letter-spacing: 2px;
-    color: #ffffff;
-    text-transform: uppercase;
-    position: relative;
-    transition: 0.5s ease;
-    cursor: pointer;
-  }
-  .btnactive {
-    font-size: 17px;
-    background: transparent;
-    border: none;
-    padding: 0.4em 1em;
-    font-weight: 600;
-    letter-spacing: 2px;
-    color: #ffffff;
-    text-transform: uppercase;
-    position: relative;
-    transition: 0.5s ease;
-    cursor: pointer;
-  }
-  .btnactive::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 2px;
-    width: 0;
-    background-color: #ffffff;
-    transition: none;
-  }
- 
-  .btn::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 2px;
-    width: 0;
-    background-color: #ffffff;
-    transition: 0.5s ease;
-  }
-  
-  .btn:hover {
-    color: white;
-    transition-delay: 0.5s;
-  }
-  
-  .btn:hover::before {
-    width: 100%;
-  }
-  .btnactive::before {
-    width: 100%;
-  }  
- 
+  font-size: 17px;
+  background: transparent;
+  border: none;
+  padding: 0.4em 1em;
+  letter-spacing: 2px;
+  color: #ffffff;
+  text-transform: uppercase;
+  position: relative;
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+
+.btnactive {
+  font-size: 17px;
+  background: transparent;
+  border: none;
+  padding: 0.4em 1em;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #ffffff;
+  text-transform: uppercase;
+  position: relative;
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+
+.btnactive::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background-color: #ffffff;
+  transition: none;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background-color: #ffffff;
+  transition: 0.5s ease;
+}
+
+.btn:hover {
+  color: white;
+  transition-delay: 0.5s;
+}
+
+.btn:hover::before {
+  width: 100%;
+}
+
+.btnactive::before {
+  width: 100%;
+}
