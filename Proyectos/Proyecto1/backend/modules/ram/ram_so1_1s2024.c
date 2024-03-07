@@ -52,5 +52,5 @@ static void __exit finish(void) {
 module_init(start);
 module_exit(finish);
 
-// sudo dmesg -C limpia la consola
-// sudo dmesg muestra los mensajes del kernel
+// sudo insmod ram_so1_1s2024.ko
+// sudo rmmod ram_so1_1s2024.ko

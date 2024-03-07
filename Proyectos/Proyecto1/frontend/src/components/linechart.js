@@ -20,6 +20,12 @@ const LineChart = ({ data}) => {
           maintainAspectRatio: false,
           animation: {
             duration: 0
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 100
+            }
           }
         }
       });

@@ -134,7 +134,9 @@ static int escribir_a_proc(struct seq_file *file_proc, void *v)
     seq_printf(file_proc, "\"sleeping\":%d,\n", sleeping);
     seq_printf(file_proc, "\"zombie\":%d,\n", zombie);
     seq_printf(file_proc, "\"stopped\":%d,\n", stopped);
-    seq_printf(file_proc, "\"total\":%d\n", running + sleeping + zombie + stopped);
+    seq_printf(file_proc, "\"total\":%d,\n", running + sleeping + zombie + stopped);
+    //porcentaje
+    seq_printf(file_proc, "\"cpu_percentage\":%d\n", ((running + sleeping)*100)/(running + sleeping + zombie + stopped)  );
     seq_printf(file_proc, "}\n");
     return 0;
 }
@@ -164,3 +166,6 @@ static void __exit modulo_cleanup(void)
 
 module_init(modulo_init);
 module_exit(modulo_cleanup);
+
+// sudo insmod cpu_so1_1s2024.ko
+// sudo rmmod cpu_so1_1s2024.ko

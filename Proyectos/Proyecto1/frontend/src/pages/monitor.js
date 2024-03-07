@@ -12,8 +12,10 @@ import '../css/monitor.css';
 function Monitor() {
 
     //Constantes para las graficas
-    const [data_ram, setDataRam] = useState('');
-    const [data_cpu, setDataCpu] = useState('');
+    const [data_ram, setDataRam] = useState([50,50]);
+    const [data_cpu, setDataCpu] = useState([50,50]);
+    const [data_history, setDataHistory] = useState('');
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -25,10 +27,11 @@ function Monitor() {
                     throw new Error('Network response was not ok');
                 }
 
-                const data = await response.json();
-                console.log(data);
-                setDataRam(data.ram_percentage);
-                setDataCpu(data.cpu_percentage);
+                const resp = await response.json();
+                console.log(resp);
+                setDataRam(resp.data.ram_percentage);
+                setDataCpu(resp.data.cpu_percentage);
+                setDataHistory(resp.data_historial);
 
             } catch (error) {
                 console.error('Error:', error);
@@ -55,30 +58,30 @@ function Monitor() {
     //const data = [12, 19, 3, 5, 2, 3];
     //const labels = ['January', 'February', 'March', 'April', 'May', 'June'];
 
-    const labels = ['1', '2', '3', '4', '5'];
-    const data = {
-        labels: labels,
-        datasets: [
-            {
-                label: 'RAM',
-                data: [54, 44, 31, 29, 13],
-                borderColor: '#94d2bd',
-                backgroundColor: '#94d2bd',
-                borderWidth: 1,
-                tension: 0.5, // Suaviza la línea
-                fill: false
-            },
-            {
-                label: 'CPU',
-                data: [10, 22, 35, 41, 59],
-                borderColor: '#ee9b00',
-                backgroundColor: '#ee9b00',
-                borderWidth: 1,
-                tension: 0.5, // Suaviza la línea
-                fill: false
-            }
-        ]
-    };
+    
+    // const data = {
+    //     labels: ['1', '2', '3', '4', '5'],
+    //     datasets: [
+    //         {
+    //             label: 'RAM',
+    //             data: [54, 44, 31, 29, 13],
+    //             borderColor: '#94d2bd',
+    //             backgroundColor: '#94d2bd',
+    //             borderWidth: 1,
+    //             tension: 0.5, // Suaviza la línea
+    //             fill: false
+    //         },
+    //         {
+    //             label: 'CPU',
+    //             data: [10, 22, 35, 41, 59],
+    //             borderColor: '#ee9b00',
+    //             backgroundColor: '#ee9b00',
+    //             borderWidth: 1,
+    //             tension: 0.5, // Suaviza la línea
+    //             fill: false
+    //         }
+    //     ]
+    // };
 
     //hacer una consulta a mi backend en el puerto 8000, endpoint /monitor
 
@@ -91,11 +94,11 @@ function Monitor() {
                     <Col>
                         <Card title={"Monitoreo en Tiempo Real"}>
                             <Row>
-                                <Col>
-                                    <PieChart data={data_ram} labels={['Libre', 'En uso']} colors={['#94d2bd', '#005f73']} title={"RAM"} />
+                                <Col>                                    
+                                    <PieChart data={data_ram} labels={[`Libre: ${data_ram[0]}%`, `En uso: ${data_ram[1]}%`]} colors={['#94d2bd', '#005f73']} title={"RAM"} />
                                 </Col>
                                 <Col>
-                                    <PieChart data={data_cpu} labels={['Libre', 'En uso']} colors={['#ca6702', '#bb3e03']} title={"CPU"} />
+                                    <PieChart data={data_cpu} labels={[`Libre: ${data_cpu[0]}%`, `En uso: ${data_cpu[1]}%`]} colors={['#ca6702', '#bb3e03']} title={"CPU"} />
                                 </Col>
                             </Row>
                         </Card>
@@ -106,7 +109,7 @@ function Monitor() {
                         <Card title={"Monitoreo Histórico"}>
                             <Row>
                                 <Col>
-                                    <LineChart data={data} />
+                                    <LineChart data={data_history} />
                                 </Col>
                             </Row>            </Card>
                     </Col>
