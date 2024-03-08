@@ -12,11 +12,18 @@ function ProcessTree() {
 
     // Consultar el endpoint /processtree para obtener el array de PID disponibles
     useEffect(() => {
+        fetchPidData();
+        const interval = setInterval(fetchPidData, 1000);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    const fetchPidData = () => {
         fetch('http://localhost:8000/processtree')
             .then(response => response.json())
             .then(data => setPidData(data))
             .catch(error => console.error('Error fetching PID options:', error));
-    }, []);
+    }
 
     // Consultar el endpoint /processtree/{pid} para obtener el arbol de procesos
     useEffect(() => {

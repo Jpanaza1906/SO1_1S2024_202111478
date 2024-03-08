@@ -51,6 +51,12 @@ static int escribir_a_proc(struct seq_file *file_proc, void *v)
     percentage = (total_usage * 100) / total_cpu_time;
     percentage = (percentage * 1000)/ total_cpu_time;
 
+    //ciclo while que divida dentro de 10 hasta que el porcentaje sea menor a 100
+    while (percentage > 100)
+    {
+        percentage = percentage / 10;
+    }
+
     seq_printf(file_proc, "{\n\"cpu_total\":%d,\n", total_cpu_time);
     seq_printf(file_proc, "\"cpu_percentage\":%d,\n", percentage);
     seq_printf(file_proc, "\"processes\":[\n");
@@ -134,9 +140,9 @@ static int escribir_a_proc(struct seq_file *file_proc, void *v)
     seq_printf(file_proc, "\"sleeping\":%d,\n", sleeping);
     seq_printf(file_proc, "\"zombie\":%d,\n", zombie);
     seq_printf(file_proc, "\"stopped\":%d,\n", stopped);
-    seq_printf(file_proc, "\"total\":%d,\n", running + sleeping + zombie + stopped);
+    seq_printf(file_proc, "\"total\":%d\n", running + sleeping + zombie + stopped);
     //porcentaje
-    seq_printf(file_proc, "\"cpu_percentage\":%d\n", ((running + sleeping)*100)/(running + sleeping + zombie + stopped)  );
+    //seq_printf(file_proc, "\"cpu_percentage\":%d\n", ((running + sleeping)*100)/(running + sleeping + zombie + stopped)  );
     seq_printf(file_proc, "}\n");
     return 0;
 }

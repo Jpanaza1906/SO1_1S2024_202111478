@@ -1,21 +1,24 @@
-import React, {useEffect, useRef} from "react";
-import {DataSet, Network} from "vis-network/standalone/umd/vis-network.min";
+import React, { useEffect, useRef } from "react";
+import { DataSet, Network } from "vis-network/standalone/umd/vis-network.min";
 
-const Tree = ({processData}) => {
+const Tree = ({ processData }) => {
     const containerRef = useRef(null);
     let networkRef = useRef(null);
 
     useEffect(() => {
-        if (processData && containerRef.current){
+        if (processData && containerRef.current) {
             const nodes = new DataSet();
             const edges = new DataSet();
 
-            nodes.add({id: processData.pid, label: `${processData.name}\nPID: ${processData.pid}`});
+            nodes.add({ id: processData.pid, label: `${processData.name}\npid = ${processData.pid}` });
 
-            processData.child.forEach(child => {
-                nodes.add({id: child.pid, label: `${child.name}\nPID: ${child.pid}`});
-                edges.add({from: child.pidPadre, to: child.pid});
-            });
+            if (processData.child) {
+
+                processData.child.forEach(child => {
+                    nodes.add({ id: child.pid, label: `${child.name}\npid = ${child.pid}` });
+                    edges.add({ from: child.pidPadre, to: child.pid });
+                });
+            }
 
             const data = {
                 nodes: nodes,
@@ -27,10 +30,10 @@ const Tree = ({processData}) => {
                     hierarchical: {
                         direction: "UD",
                         sortMethod: "directed",
-                    },                    
+                    },
                 },
                 edges: {
-                    font: {align: "top"}
+                    font: { align: "top" }
                 }
             };
 
@@ -38,7 +41,7 @@ const Tree = ({processData}) => {
         }
 
         return () => {
-            if (networkRef.current){
+            if (networkRef.current) {
                 networkRef.current.destroy();
             }
         };
@@ -46,7 +49,7 @@ const Tree = ({processData}) => {
 
     return (
         <div>
-            <div ref={containerRef} style={{ width: '100%', height: '550px'}} ></div>
+            <div ref={containerRef} style={{ width: '100%', height: '550px' }} ></div>
         </div>
     );
 
