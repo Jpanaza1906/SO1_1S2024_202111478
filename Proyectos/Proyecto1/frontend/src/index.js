@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Monitor from './pages/monitor';
-import Proceso from './pages/proceso';
+import ProcessTree from './pages/processtree';
+import StateDiagram from './pages/statediagram';
 import Header from './components/header';
 import './css/index.css'
 
@@ -15,7 +16,8 @@ root.render(
       <Routes>
         <Route index element={<Monitor />} />
         <Route path='/monitor' element={<Monitor />} />
-        <Route path='/proceso' element={<Proceso />} />
+        <Route path='/processtree' element={<ProcessTree />} />
+        <Route path='/statediagram' element={<StateDiagram />} />
       </Routes>
     </BrowserRouter>
   </div>

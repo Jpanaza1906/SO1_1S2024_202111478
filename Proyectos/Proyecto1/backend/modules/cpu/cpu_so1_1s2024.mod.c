@@ -43,7 +43,7 @@ __used __section("__versions") =
 	"jiffies\0"
 	"\x1c\x00\x00\x00\x70\xfc\xbe\x37"
 	"jiffies_to_msecs\0\0\0\0"
-	"\x14\x00\x00\x00\x4e\x48\x78\x68"
+	"\x14\x00\x00\x00\x34\xe9\xb6\xe1"
 	"init_task\0\0\0"
 	"\x14\x00\x00\x00\xba\xcd\xf5\x73"
 	"seq_printf\0\0"
@@ -66,4 +66,4 @@ __used __section("__versions") =
 MODULE_INFO(depends, "");
 
 
-MODULE_INFO(srcversion, "72D8FB94702EB23FF6CB050");
+MODULE_INFO(srcversion, "CB12C4B4D64763574ECBBE7");

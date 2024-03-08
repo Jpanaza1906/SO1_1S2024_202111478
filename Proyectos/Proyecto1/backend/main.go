@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"strconv"
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -63,6 +64,7 @@ func main() {
 	router := mux.NewRouter().StrictSlash(true)
 	//================== Rutas del servidor ==================
 	router.HandleFunc("/monitor", monitor).Methods("GET")
+	router.HandleFunc("/processtree", processtree).Methods("GET")
 	//router.HandleFunc("/", indexRoute)
 	//router.HandleFunc("/Registrar", registro).Methods("POST")
 	//router.HandleFunc("/Estudiantes", getEstudiantes).Methods("GET")
@@ -284,4 +286,109 @@ func getRegistros() ([]Registro, error) {
 		return nil, err
 	}
 	return registros, nil
+}
+
+// ============================================= Funcion para listar los procesos del sistema======================================================
+
+func processtree(w http.ResponseWriter, r *http.Request) {
+	// Obtener los procesos del sistema
+	procesos, err := getProcesos()
+	if err != nil {
+		http.Error(w, "Error al obtener los procesos del sistema", http.StatusInternalServerError)
+		return
+	}
+
+	if r.URL.Query().Get("pid") == "" {
+		// obtener todos los pid de los procesos padres, no los hijos
+		var pids []int
+		for _, proceso := range procesos.Processes {
+			pids = append(pids, proceso.Pid)
+		}
+
+		// Convertir la estructura a formato JSON
+		jsonData, err := json.Marshal(pids)
+		if err != nil {
+			http.Error(w, "Error al convertir los datos a JSON", http.StatusInternalServerError)
+			return
+		}
+
+		// Enviar la respuesta
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		w.Write(jsonData)
+
+	} else {
+
+		// Obtener el PID deseado en los params de la URL
+		pidStr := r.URL.Query().Get("pid")
+		pid, err := strconv.Atoi(pidStr)
+		if err != nil {
+			http.Error(w, "El parametro pid es incorrecto", http.StatusBadRequest)
+			return
+		}
+
+		// Buscar el proceso padre con el PID deseado
+		var procesoPadre ProcesoPadre
+		for _, proceso := range procesos.Processes {
+			if proceso.Pid == pid {
+				procesoPadre = proceso
+				break
+			}
+		}
+
+		// Convertir la estructura a formato JSON
+		jsonData, err := json.Marshal(procesoPadre)
+
+		if err != nil {
+			http.Error(w, "Error al convertir los datos a JSON", http.StatusInternalServerError)
+			return
+		}
+
+		// Enviar la respuesta
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		w.Write(jsonData)
+	}
+
+}
+
+// Definir una estructura paa el objeto JSON
+type ProcessData struct {
+	Processes []ProcesoPadre `json:"processes"`
+}
+
+// Estructura para los procesos padre
+type ProcesoPadre struct {
+	Pid   int           `json:"pid"`
+	Name  string        `json:"name"`
+	User  int           `json:"user"`
+	State int           `json:"state"`
+	Ram   int           `json:"ram"`
+	Child []ProcesoHijo `json:"child"`
+}
+
+// Estructura para los procesos hijo
+type ProcesoHijo struct {
+	Pid      int    `json:"pid"`
+	Name     string `json:"name"`
+	State    int    `json:"state"`
+	PidPadre int    `json:"pidPadre"`
+}
+
+// Funcion para obtener los procesos del sistema
+func getProcesos() (ProcessData, error) {
+	cmd := exec.Command("sh", "-c", "cat /proc/cpu_so1_1s2024")
+	stdout, err := cmd.CombinedOutput()
+
+	if err != nil {
+		return ProcessData{}, err
+	}
+	// Convertir la salida a formato JSON
+	var data ProcessData
+	err = json.Unmarshal(stdout, &data)
+	if err != nil {
+		return ProcessData{}, err
+	}
+
+	return data, nil
 }

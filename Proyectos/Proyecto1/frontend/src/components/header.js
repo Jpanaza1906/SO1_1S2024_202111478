@@ -26,8 +26,11 @@ function Header() {
                         <Nav.Link href="monitor">
                             <button className={isActiveLink('/monitor')}>MONITOR</button>
                         </Nav.Link>
-                        <Nav.Link href="proceso">
-                            <button className={isActiveLink('/proceso')}>PROCESOS</button>
+                        <Nav.Link href="processtree">
+                            <button className={isActiveLink('/processtree')}>PROCESS TREE</button>
+                        </Nav.Link>
+                        <Nav.Link href="statediagram">
+                            <button className={isActiveLink('/statediagram')}>STATE DIAGRAM</button>
                         </Nav.Link>
                     </Nav>
                 </Container>

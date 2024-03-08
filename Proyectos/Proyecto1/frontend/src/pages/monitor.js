@@ -12,8 +12,8 @@ import '../css/monitor.css';
 function Monitor() {
 
     //Constantes para las graficas
-    const [data_ram, setDataRam] = useState([50,50]);
-    const [data_cpu, setDataCpu] = useState([50,50]);
+    const [data_ram, setDataRam] = useState([50, 50]);
+    const [data_cpu, setDataCpu] = useState([50, 50]);
     const [data_history, setDataHistory] = useState('');
 
 
@@ -48,53 +48,14 @@ function Monitor() {
         return () => clearInterval(intervalId);
     }, []);
 
-    //Datos de la grafica de personas por vehiculo
-    //const data_personas = [dataGraphs.personal, dataGraphs.mediano, dataGraphs.grande];
-
-    //const data_ram = [50, 50];
-
-    //const data_cpu = [50, 50];
-
-    //const data = [12, 19, 3, 5, 2, 3];
-    //const labels = ['January', 'February', 'March', 'April', 'May', 'June'];
-
-    
-    // const data = {
-    //     labels: ['1', '2', '3', '4', '5'],
-    //     datasets: [
-    //         {
-    //             label: 'RAM',
-    //             data: [54, 44, 31, 29, 13],
-    //             borderColor: '#94d2bd',
-    //             backgroundColor: '#94d2bd',
-    //             borderWidth: 1,
-    //             tension: 0.5, // Suaviza la línea
-    //             fill: false
-    //         },
-    //         {
-    //             label: 'CPU',
-    //             data: [10, 22, 35, 41, 59],
-    //             borderColor: '#ee9b00',
-    //             backgroundColor: '#ee9b00',
-    //             borderWidth: 1,
-    //             tension: 0.5, // Suaviza la línea
-    //             fill: false
-    //         }
-    //     ]
-    // };
-
-    //hacer una consulta a mi backend en el puerto 8000, endpoint /monitor
-
-
-
     return (
         <div className='Contain'>
             <Container>
                 <Row>
                     <Col>
-                        <Card title={"Monitoreo en Tiempo Real"}>
+                        <Card title={"Real-time Monitor"}>
                             <Row>
-                                <Col>                                    
+                                <Col>
                                     <PieChart data={data_ram} labels={[`Libre: ${data_ram[0]}%`, `En uso: ${data_ram[1]}%`]} colors={['#94d2bd', '#005f73']} title={"RAM"} />
                                 </Col>
                                 <Col>
@@ -106,12 +67,13 @@ function Monitor() {
                 </Row>
                 <Row>
                     <Col>
-                        <Card title={"Monitoreo Histórico"}>
+                        <Card title={"Historic Monitor"}>
                             <Row>
                                 <Col>
                                     <LineChart data={data_history} />
                                 </Col>
-                            </Row>            </Card>
+                            </Row>            
+                        </Card>
                     </Col>
                 </Row>
             </Container>

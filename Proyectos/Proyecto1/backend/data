@@ -1,0 +1,21 @@
+{
+    "pid": 35936,
+    "name": "spotify",
+    "user": 1000,
+    "state": 1,
+    "ram": 1140,
+    "child": [
+        {
+            "pid": 35996,
+            "name": "spotify",
+            "state": 8193,
+            "pidPadre": 35936
+        },
+        {
+            "pid": 36016,
+            "name": "spotify",
+            "state": 8193,
+            "pidPadre": 35936
+        }
+    ]
+}
