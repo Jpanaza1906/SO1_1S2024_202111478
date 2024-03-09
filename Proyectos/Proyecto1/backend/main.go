@@ -20,6 +20,7 @@ import (
 //============================================= Conexion a la base de datos =============================================
 
 var conexion = ConexionMysql()
+var process *exec.Cmd
 
 func ConexionMysql() *sql.DB {
 	err := godotenv.Load()
@@ -65,6 +66,7 @@ func main() {
 	//================== Rutas del servidor ==================
 	router.HandleFunc("/monitor", monitor).Methods("GET")
 	router.HandleFunc("/processtree", processtree).Methods("GET")
+	router.HandleFunc("/statediagram", statediagram).Methods("GET")
 	//router.HandleFunc("/", indexRoute)
 	//router.HandleFunc("/Registrar", registro).Methods("POST")
 	//router.HandleFunc("/Estudiantes", getEstudiantes).Methods("GET")
@@ -391,4 +393,143 @@ func getProcesos() (ProcessData, error) {
 	}
 
 	return data, nil
+}
+
+// ============================================= Funcion para obtener el diagrama de estado del sistema======================================================
+
+func statediagram(w http.ResponseWriter, r *http.Request) {
+	// accion
+	action := r.URL.Query().Get("action")
+
+	if action == "start" {
+		cmd := exec.Command("bash", "-c", "./modules/process/process_so1_1s2024")
+		err := cmd.Start()
+
+		if err != nil {
+			http.Error(w, "Error al iniciar el proceso", http.StatusInternalServerError)
+			return
+		}
+
+		// obtener el PID del proceso
+		childPid := cmd.Process.Pid
+
+		// almacenar el cmd para futuras operaciones
+		process = cmd
+
+		//mandar el pid en formato json data : {pid: 1234}
+		jsonData, err := json.Marshal(map[string]int{"pid": childPid})
+		if err != nil {
+			http.Error(w, "Error al convertir los datos a JSON", http.StatusInternalServerError)
+			return
+		}
+
+		// Enviar la respuesta
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		w.Write(jsonData)
+
+	} else if action == "stop" {
+		pidStr := r.URL.Query().Get("pid")
+		if pidStr == "" {
+			http.Error(w, "El parametro pid es incorrecto", http.StatusBadRequest)
+			return
+		}
+
+		pid, err := strconv.Atoi(pidStr)
+		if err != nil {
+			http.Error(w, "El parametro pid es incorrecto", http.StatusBadRequest)
+			return
+		}
+
+		// Enviar la SIGSTOP al proceso
+		cmd := exec.Command("kill", "-SIGSTOP", strconv.Itoa(pid))
+		err = cmd.Run()
+
+		if err != nil {
+			http.Error(w, "Error al detener el proceso", http.StatusInternalServerError)
+			return
+		}
+		//retornar la respuesta en formato json
+		jsonData, err := json.Marshal(map[string]string{"message": "Proceso detenido con PID: " + pidStr})
+		if err != nil {
+			http.Error(w, "Error al convertir los datos a JSON", http.StatusInternalServerError)
+			return
+		}
+
+		// Enviar la respuesta
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		w.Write(jsonData)
+
+	} else if action == "resume" {
+		pidStr := r.URL.Query().Get("pid")
+		if pidStr == "" {
+			http.Error(w, "El parametro pid es incorrecto", http.StatusBadRequest)
+			return
+		}
+
+		pid, err := strconv.Atoi(pidStr)
+		if err != nil {
+			http.Error(w, "El parametro pid es incorrecto", http.StatusBadRequest)
+			return
+		}
+
+		// Enviar la SIGCONT al proceso
+		cmd := exec.Command("kill", "-SIGCONT", strconv.Itoa(pid))
+		err = cmd.Run()
+
+		if err != nil {
+			http.Error(w, "Error al reanudar el proceso", http.StatusInternalServerError)
+			return
+		}
+
+		//retornar la respuesta en formato json
+		jsonData, err := json.Marshal(map[string]string{"message": "Proceso reanudado con PID: " + pidStr})
+		if err != nil {
+			http.Error(w, "Error al convertir los datos a JSON", http.StatusInternalServerError)
+			return
+		}
+
+		// Enviar la respuesta
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		w.Write(jsonData)
+
+	} else if action == "kill" {
+		pidStr := r.URL.Query().Get("pid")
+		if pidStr == "" {
+			http.Error(w, "El parametro pid es incorrecto", http.StatusBadRequest)
+			return
+		}
+
+		pid, err := strconv.Atoi(pidStr)
+		if err != nil {
+			http.Error(w, "El parametro pid es incorrecto", http.StatusBadRequest)
+			return
+		}
+
+		// Enviar la SIGKILL al proceso
+		cmd := exec.Command("kill", "-SIGKILL", strconv.Itoa(pid))
+		err = cmd.Run()
+
+		if err != nil {
+			http.Error(w, "Error al matar el proceso", http.StatusInternalServerError)
+			return
+		}
+
+		//retornar la respuesta en formato json
+		jsonData, err := json.Marshal(map[string]string{"message": "Proceso matado con PID: " + pidStr})
+		if err != nil {
+			http.Error(w, "Error al convertir los datos a JSON", http.StatusInternalServerError)
+			return
+		}
+
+		// Enviar la respuesta
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		w.Write(jsonData)
+
+	} else {
+		http.Error(w, "La accion es incorrecta", http.StatusBadRequest)
+	}
 }
