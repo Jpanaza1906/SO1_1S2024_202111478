@@ -1,6 +1,8 @@
 version: '3.1'
 
 services:
+
+  #SERVICIO DE BASE DE DATOS ========================
   db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password --lower_case_table_names=0
@@ -20,6 +22,8 @@ services:
       - my_network
     ports:
       - 8080:8080
+
+  #SERVICIO DE BACKEND ==============================
   backend:
     image: backend_so1_p1
     container_name: API_Signal
@@ -33,6 +37,21 @@ services:
       - my_network
     ports:
       - 8000:8000
-    
+    depends_on:
+      - db
+  
+  #SERVICIO DE FRONTEND ==============================
+  frontend:
+    build: 
+      context: ./frontend
+    image: frontend_so1_p1
+    container_name: Frontend
+    restart: always
+    networks:
+      - my_network
+    ports:
+      - 80:80
+    depends_on:
+      - backend
 networks:
   my_network:
