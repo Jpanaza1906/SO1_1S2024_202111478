@@ -1,0 +1,35 @@
+#Fase de construcción
+FROM golang:latest AS builder
+
+WORKDIR /app
+
+# Copiar solo los archivos necesarios para descargar las dependencias
+COPY go.mod go.sum ./
+
+# Descargar dependencias
+RUN go mod download
+
+# Copiar el resto de los archivos
+COPY . .
+
+# Compilar la aplicación
+RUN go build -o main .
+
+# Fase de ejecucion
+FROM golang:latest
+
+WORKDIR /app
+
+# Copiar solo los archivos necesarios desde la fase de construcción
+COPY --from=builder /app/main .
+COPY --from=builder /app/.env .
+
+# Exponer el puerto 8000
+EXPOSE 8000
+
+# Ejecutar la aplicación
+CMD ["./main"]
+
+#Comandos de docker
+#docker build -t backend_so1_p1 .
+#docker run -p 8000:8000 backend_so1_p1

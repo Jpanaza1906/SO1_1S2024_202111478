@@ -92,11 +92,13 @@ function StateDiagram() {
                 </Col>
             </Row>
             <Row>
-                <CardG title={"State Diagram"}>
-                    <State action={currentAction} />
-                </CardG>
-            </Row>
+                <Col>
+                    <CardG title={"State Diagram"}>
+                        <State action={currentAction} />
+                    </CardG>
+                </Col>
             <ToastContainer />
+            </Row>
         </div>
     );
 }

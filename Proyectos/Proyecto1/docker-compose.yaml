@@ -20,5 +20,19 @@ services:
       - my_network
     ports:
       - 8080:8080
+  backend:
+    image: backend_so1_p1
+    container_name: API_Signal
+    privileged: true
+    restart: always
+    volumes:
+      - type: bind
+        source: /proc
+        target: /proc
+    networks:
+      - my_network
+    ports:
+      - 8000:8000
+    
 networks:
   my_network:

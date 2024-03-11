@@ -19,7 +19,6 @@ import (
 
 //============================================= Conexion a la base de datos =============================================
 
-var conexion = ConexionMysql()
 var process *exec.Cmd
 
 func ConexionMysql() *sql.DB {
@@ -55,6 +54,7 @@ func ConexionMysql() *sql.DB {
 //============================================= Inicialización del servidor =============================================
 
 func main() {
+	var conexion = ConexionMysql()
 	//Vaciar la tabla monitor de la base de datos
 	_, err := conexion.Exec("TRUNCATE TABLE monitor")
 	if err != nil {
@@ -253,6 +253,7 @@ func getCPUdata() (int, error) {
 
 // Funcion para insertar los datos en la base de datos
 func insertData(ramPercentage int, cpuPercentage int) error {
+	var conexion = ConexionMysql()
 	//Preparar la consulta SQL para insertar los datos
 	query := "INSERT INTO monitor (usoram, usocpu, fecha) VALUES (?,?,?)"
 	_, err := conexion.Exec(query, ramPercentage, cpuPercentage, time.Now())
@@ -264,6 +265,7 @@ func insertData(ramPercentage int, cpuPercentage int) error {
 
 // Funcion para obtener los ultimos 30 registros de la tabla monitor
 func getRegistros() ([]Registro, error) {
+	var conexion = ConexionMysql()
 	//Preparar la consulta SQL para obtener los registros
 	query := "SELECT * FROM monitor ORDER BY id DESC LIMIT 30"
 
@@ -402,7 +404,7 @@ func statediagram(w http.ResponseWriter, r *http.Request) {
 	action := r.URL.Query().Get("action")
 
 	if action == "start" {
-		cmd := exec.Command("bash", "-c", "./modules/process/process_so1_1s2024")
+		cmd := exec.Command("sleep", "infinity")
 		err := cmd.Start()
 
 		if err != nil {
@@ -410,14 +412,11 @@ func statediagram(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		// obtener el PID del proceso
-		childPid := cmd.Process.Pid
-
 		// almacenar el cmd para futuras operaciones
 		process = cmd
 
 		//mandar el pid en formato json data : {pid: 1234}
-		jsonData, err := json.Marshal(map[string]int{"pid": childPid})
+		jsonData, err := json.Marshal(map[string]int{"pid": process.Process.Pid})
 		if err != nil {
 			http.Error(w, "Error al convertir los datos a JSON", http.StatusInternalServerError)
 			return
