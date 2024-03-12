@@ -54,19 +54,12 @@ func ConexionMysql() *sql.DB {
 //============================================= Inicialización del servidor =============================================
 
 func main() {
-	var conexion = ConexionMysql()
-	//Vaciar la tabla monitor de la base de datos
-	_, err := conexion.Exec("TRUNCATE TABLE monitor")
-	if err != nil {
-		log.Fatal("Error al vaciar la tabla monitor: ", err)
-	}
-
 	//================== Crear el router del servidor ==================
 	router := mux.NewRouter().StrictSlash(true)
 	//================== Rutas del servidor ==================
-	router.HandleFunc("/monitor", monitor).Methods("GET")
-	router.HandleFunc("/processtree", processtree).Methods("GET")
-	router.HandleFunc("/statediagram", statediagram).Methods("GET")
+	router.HandleFunc("/api/monitor", monitor).Methods("GET")
+	router.HandleFunc("/api/processtree", processtree).Methods("GET")
+	router.HandleFunc("/api/statediagram", statediagram).Methods("GET")
 	//router.HandleFunc("/", indexRoute)
 	//router.HandleFunc("/Registrar", registro).Methods("POST")
 	//router.HandleFunc("/Estudiantes", getEstudiantes).Methods("GET")
