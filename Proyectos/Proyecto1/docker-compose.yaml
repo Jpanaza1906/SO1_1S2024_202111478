@@ -25,7 +25,7 @@ services:
 
   #SERVICIO DE BACKEND ==============================
   backend:
-    image: backend_so1_p1
+    image: jpanaza/backend_so1p1_202111478
     container_name: backend
     privileged: true
     restart: always
@@ -42,9 +42,7 @@ services:
   
   #SERVICIO DE FRONTEND ==============================
   frontend:
-    build: 
-      context: ./frontend
-    image: frontend_so1_p1
+    image: jpanaza/frontend_so1p1_202111478
     container_name: frontend
     restart: always
     networks:

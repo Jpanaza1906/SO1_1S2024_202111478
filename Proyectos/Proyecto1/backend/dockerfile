@@ -31,5 +31,5 @@ EXPOSE 8000
 CMD ["./main"]
 
 #Comandos de docker
-#docker build -t backend_so1_p1 .
-#docker run -p 8000:8000 backend_so1_p1
+#docker build -t backend_so1p1_202111478 .
+#docker run -p 8000:8000 backend_so1p1_202111478

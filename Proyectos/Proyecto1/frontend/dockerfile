@@ -16,5 +16,5 @@ CMD ["nginx", "-g", "daemon off;"]
 
 
 #Comandos de docker
-#docker build -t frontend_so1_p1 .
-#docker run -p 80:80 frontend_so1_p1
+#docker build -t frontend_so1p1_202111478 .
+#docker run -p 80:80 frontend_so1p1_202111478
