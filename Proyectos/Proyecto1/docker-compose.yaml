@@ -10,7 +10,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 1234
     volumes:
-      - ./db/data:/var/lib/mysql
+      - volume_mysql:/var/lib/mysql
     networks:
       - my_network
     ports:
@@ -53,3 +53,5 @@ services:
       - backend
 networks:
   my_network:
+volumes:
+  volume_mysql:
