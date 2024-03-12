@@ -26,7 +26,7 @@ services:
   #SERVICIO DE BACKEND ==============================
   backend:
     image: backend_so1_p1
-    container_name: API_Signal
+    container_name: backend
     privileged: true
     restart: always
     volumes:
@@ -45,7 +45,7 @@ services:
     build: 
       context: ./frontend
     image: frontend_so1_p1
-    container_name: Frontend
+    container_name: frontend
     restart: always
     networks:
       - my_network

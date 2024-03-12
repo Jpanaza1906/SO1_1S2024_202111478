@@ -35,7 +35,7 @@ function StateDiagram() {
                 toast.error('You can not start a new process while other process is running')
                 return;
             }
-            fetch('http://localhost:8000/statediagram?action=start')
+            fetch('/api/statediagram?action=start')
                 .then(response => response.json())
                 .then(data => {
                     setPid(data.pid);
@@ -51,7 +51,7 @@ function StateDiagram() {
                 }
 
                 // se manda por parametros la accion y el pid
-                fetch(`http://localhost:8000/statediagram?action=${action}&pid=${pid}`)
+                fetch(`/api/statediagram?action=${action}&pid=${pid}`)
                     .then(response => response.json())
                     .then(data => {
                         console.log(data);

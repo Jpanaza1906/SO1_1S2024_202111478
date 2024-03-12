@@ -19,7 +19,7 @@ function ProcessTree() {
     }, []);
 
     const fetchPidData = () => {
-        fetch('http://localhost:8000/processtree')
+        fetch('/api/processtree')
             .then(response => response.json())
             .then(data => setPidData(data))
             .catch(error => console.error('Error fetching PID options:', error));
@@ -28,7 +28,7 @@ function ProcessTree() {
     // Consultar el endpoint /processtree/{pid} para obtener el arbol de procesos
     useEffect(() => {
         if (selectedOption) {
-            fetch(`http://localhost:8000/processtree/?pid=${selectedOption}`)
+            fetch(`/api/processtree/?pid=${selectedOption}`)
                 .then(response => response.json())
                 .then(data => setTreeData(data))
                 .catch(error => console.error('Error fetching process tree:', error));

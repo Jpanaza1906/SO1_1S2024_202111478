@@ -21,7 +21,7 @@ function Monitor() {
         const fetchData = async () => {
             // Hacer una solicitud a tu backend en el puerto 8000, endpoint /monitor
             try {
-                const response = await fetch('http://localhost:8000/monitor');
+                const response = await fetch('/api/monitor');
 
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
