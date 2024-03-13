@@ -3,7 +3,7 @@
 ## Tareas
 [Tarea 1](/Tareas/SO1_TAREA1_202111478/Tarea1.md)
 
-[Tarea 2](/Tareas/SO1_TAREA1_202111478/Tarea2.md)
+[Tarea 2](/Tareas/SO1_TAREA2_202111478/Tarea2.md)
 
 ## Hojas de trabajo
 
