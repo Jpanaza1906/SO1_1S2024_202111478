@@ -7,6 +7,8 @@
 
 [Tarea 3](/Tareas/SO1_TAREA3_202111478/Tarea3.md)
 
+[Tarea 4](/Tareas/SO1_TAREA4_202111478/Tarea4.md)
+
 ## Hojas de trabajo
 
 [Hoja de Trabajo 1](/Tareas/SO1_HT1_202111478/HT1.md)
