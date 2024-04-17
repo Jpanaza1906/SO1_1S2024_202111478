@@ -2,11 +2,13 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"net"
 	pb "server_grpc/proto"
 
+	"github.com/confluentinc/confluent-kafka-go/kafka"
 	"google.golang.org/grpc"
 )
 
@@ -19,8 +21,10 @@ type server struct {
 }
 
 // Const port
-const (
-	port = ":3001"
+var (
+	port              = ":3001"
+	kafkaBootstrapURL = "localhost:9092"
+	kafkaTopic        = "topic-sopes1"
 )
 
 // Struct Data
@@ -43,6 +47,33 @@ func (s *server) ReturnInfo(ctx context.Context, in *pb.RequestId) (*pb.ReplyInf
 	fmt.Println(">>> Data: ", data)
 
 	// Aqui se mandaria la data a kafka
+
+	// Convertir struct a JSON
+	dataJSON, err := json.Marshal(data)
+	if err != nil {
+		log.Printf("Failed to marshal data to JSON: %v\n", err)
+		return nil, err
+	}
+
+	// Configurar el productor de Kafka
+	p, err := kafka.NewProducer(&kafka.ConfigMap{"bootstrap.servers": kafkaBootstrapURL})
+	if err != nil {
+		log.Printf("Failed to create Kafka producer: %v\n", err)
+		return nil, err
+	}
+	defer p.Close()
+
+	// Enviar el mensaje a Kafka
+	err = p.Produce(&kafka.Message{
+		TopicPartition: kafka.TopicPartition{Topic: &kafkaTopic, Partition: kafka.PartitionAny},
+		Value:          []byte(dataJSON),
+	}, nil)
+	if err != nil {
+		log.Printf("Failed to produce message to Kafka: %v\n", err)
+		return nil, err
+	}
+
+	log.Println("Message sent to Kafka")
 
 	return &pb.ReplyInfo{Info: "Hi Client! I received your data!"}, nil
 }
