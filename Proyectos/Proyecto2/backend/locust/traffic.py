@@ -54,3 +54,5 @@ class trafficData(HttpUser):
         else:
             print(">>> Finished sending data")
             self.stop(True)
+            
+#locust -f traffic.py

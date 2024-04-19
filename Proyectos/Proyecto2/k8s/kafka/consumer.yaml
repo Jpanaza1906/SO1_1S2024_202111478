@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: kafka
+  name: consumer-deployment
+spec:
+  selector:
+    matchLabels:
+      app: consumer-deployment
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: consumer-deployment
+    spec:
+      containers:
+      - name: consumer-deployment
+        image: jpanaza/so1p2-consumer:1.0.3

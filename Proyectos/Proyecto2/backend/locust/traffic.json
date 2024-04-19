@@ -6,6 +6,18 @@
         "rank": "1"
     },
     {
+        "name": "Bohemian Rhapsody",
+        "album": "A Night at the Opera",
+        "year": "1975",
+        "rank": "1"
+    },
+    {
+        "name": "Bohemian Rhapsody",
+        "album": "A Night at the Opera",
+        "year": "1975",
+        "rank": "1"
+    },
+    {
         "name": "Hotel California",
         "album": "Hotel California",
         "year": "1976",
@@ -70,23 +82,5 @@
         "album": "Are You Experienced",
         "year": "1967",
         "rank": "12"
-    },
-    {
-        "name": "Billie Jean",
-        "album": "Thriller",
-        "year": "1982",
-        "rank": "13"
-    },
-    {
-        "name": "Let It Be",
-        "album": "Let It Be",
-        "year": "1970",
-        "rank": "14"
-    },
-    {
-        "name": "Sweet Child O' Mine",
-        "album": "Appetite for Destruction",
-        "year": "1987",
-        "rank": "15"
     }
 ]

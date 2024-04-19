@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: kafka
+  name: grpc-deployment
+spec:
+  selector:
+    matchLabels:
+      app: grpc-deployment
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: grpc-deployment
+    spec:
+      containers:
+      - name: grpc-client-deployment
+        image: jpanaza/so1p2-grpc-client:1.0.0
+        ports:
+        - containerPort: 3000
+      - name: grpc-server-deployment
+        image: jpanaza/so1p2-grpc-server:1.0.0
+        ports:
+        - containerPort: 3001
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: grpc-service
+  namespace: kafka
+spec:
+  selector:
+    app: grpc-deployment
+  ports:
+  - port: 3000
+    targetPort: 3000
