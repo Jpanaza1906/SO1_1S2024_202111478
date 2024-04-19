@@ -18,10 +18,18 @@ spec:
         image: jpanaza/so1p2-grpc-client:1.0.0
         ports:
         - containerPort: 3000
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "50m"
       - name: grpc-server-deployment
         image: jpanaza/so1p2-grpc-server:1.0.0
         ports:
         - containerPort: 3001
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "50m"
 
 ---
 
