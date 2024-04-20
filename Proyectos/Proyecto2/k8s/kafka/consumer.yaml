@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: consumer-deployment
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -28,6 +28,8 @@ metadata:
   namespace: kafka
   name: consumer-hpa
 spec:
+  selector:
+  template:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
@@ -41,3 +43,4 @@ spec:
       target:
         type: Utilization
         averageUtilization: 50
+---
