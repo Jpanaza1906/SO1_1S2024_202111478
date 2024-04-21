@@ -1,2 +1,2 @@
-./backend/rust/server/target/debug/
-./backend/rust/client/target/debug/
+./backend/apirust/server/target/debug/
+./backend/apirust/client/target/debug/
