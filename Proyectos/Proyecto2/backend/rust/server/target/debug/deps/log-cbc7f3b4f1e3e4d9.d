@@ -1,0 +1,10 @@
+/home/josep/USAC/7mo_Semestre/Sistemas_operativos_1/Laboratorio/Repositorio-Git/SO1_1S2024_202111478/Proyectos/Proyecto2/backend/rust/server/target/debug/deps/liblog-cbc7f3b4f1e3e4d9.rmeta: /home/josep/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.21/src/lib.rs /home/josep/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.21/src/macros.rs /home/josep/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.21/src/serde.rs /home/josep/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.21/src/__private_api.rs
+
+/home/josep/USAC/7mo_Semestre/Sistemas_operativos_1/Laboratorio/Repositorio-Git/SO1_1S2024_202111478/Proyectos/Proyecto2/backend/rust/server/target/debug/deps/liblog-cbc7f3b4f1e3e4d9.rlib: /home/josep/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.21/src/lib.rs /home/josep/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.21/src/macros.rs /home/josep/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.21/src/serde.rs /home/josep/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.21/src/__private_api.rs
+
+/home/josep/USAC/7mo_Semestre/Sistemas_operativos_1/Laboratorio/Repositorio-Git/SO1_1S2024_202111478/Proyectos/Proyecto2/backend/rust/server/target/debug/deps/log-cbc7f3b4f1e3e4d9.d: /home/josep/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.21/src/lib.rs /home/josep/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.21/src/macros.rs /home/josep/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.21/src/serde.rs /home/josep/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.21/src/__private_api.rs
+
+/home/josep/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.21/src/lib.rs:
+/home/josep/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.21/src/macros.rs:
+/home/josep/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.21/src/serde.rs:
+/home/josep/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.21/src/__private_api.rs:
