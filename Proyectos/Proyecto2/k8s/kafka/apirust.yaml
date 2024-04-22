@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: kafka
+  name: apirust-deployment
+spec:
+  selector:
+    matchLabels:
+      app: apirust-deployment
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: apirust-deployment
+    spec:
+      containers:
+      - name: rust-client-deployment
+        image: jpanaza/so1p2-rust-client:1.0.2
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "50m"
+        ports:
+        - containerPort: 8000
+      - name: rust-server-deployment
+        image: jpanaza/so1p2-rust-server:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "50m"
+        ports:
+        - containerPort: 8080
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: apirust-service
+  namespace: kafka
+spec:
+  selector:
+    app: apirust-deployment
+  ports:
+  - port: 8000
+    targetPort: 8000

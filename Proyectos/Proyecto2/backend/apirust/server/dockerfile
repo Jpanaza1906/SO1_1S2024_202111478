@@ -1,0 +1,35 @@
+# Usa la imagen de Rust como base
+FROM rust:latest as builder
+
+# Establece el directorio de trabajo dentro del contenedor
+WORKDIR /usr/src/app
+
+# Copia el archivo Cargo.toml y el archivo Cargo.lock para permitir la descarga de las dependencias antes de copiar el resto del código
+COPY Cargo.toml Cargo.lock ./
+
+# Descarga las dependencias
+RUN cargo fetch
+
+# Copia el resto del código fuente
+COPY src ./src
+
+# Compila la aplicación
+RUN cargo build --release
+
+# Usa una imagen mínima de Alpine como base para reducir el tamaño del contenedor
+FROM alpine:latest
+
+# Establece el directorio de trabajo dentro del contenedor
+WORKDIR /usr/src/app
+
+# Copia el binario compilado desde el contenedor de compilación al contenedor de producción
+COPY --from=builder /usr/src/app/target/release/server .
+
+# Ejecuta la aplicación al iniciar el contenedor
+CMD ["./server"]
+
+
+# Construir la imagen con mi usuario jpanaza y tag:latest
+# docker build -t jpanaza/so1p2-rust-server:latest .
+# Subir la imagen a Docker Hub
+# docker push jpanaza/so1p2-rust-server:latest

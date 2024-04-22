@@ -1,7 +1,11 @@
 //Importaciones
-use rocket::response::status::BadRequest;
 use rocket::serde::json::{json, Value as JsonValue};
 use rocket::serde::json::Json;
+use rocket::http::Status;
+
+use std::time::Duration;
+use rdkafka::producer::{FutureProducer, FutureRecord};
+use rdkafka::ClientConfig;
 
 //Estructura de datos
 #[derive(rocket::serde::Deserialize)]
@@ -12,14 +16,58 @@ struct Data {
     rank: String
 }
 
+//Funcion para enviar datos a Kafka
+async fn produce(data: &Data) -> Result<(), Box<dyn std::error::Error>> {
+    // Configurar la dirección del broker y el nombre del tema Kafka
+    let broker_address = "my-cluster-kafka-bootstrap:9092";
+    let kafka_topic = "topic_sopes1";
+    
+    // Configurar el cliente Kafka
+    let producer: FutureProducer = ClientConfig::new()
+        .set("bootstrap.servers", broker_address)
+        .create()?;
+    
+    // Crear el mensaje a enviar
+    let message_value = format!(
+        r#"{{"name":"{}","album":"{}","year":"{}","rank":"{}"}}"#,
+        data.name, data.album, data.year, data.rank
+    );
+
+    // Construir y enviar el mensaje
+    let record = FutureRecord::to(kafka_topic)
+        .key(&data.rank)
+        .payload(&message_value);
+    
+    match producer.send(record, Duration::from_secs(0)).await {
+        Ok(_) => println!("Mensaje enviado exitosamente"),
+        Err((e, _)) => eprintln!("Error al enviar mensaje: {}", e),
+    }
+
+    Ok(())
+}
+
+
+
 //Definir el endpoint /data
 #[rocket::post("/data", data = "<data>")]
-fn receive_data(data: Json<Data>) -> Result<String, BadRequest<String>> {
-    let receive_data = data.into_inner();
-    let response = JsonValue::from(json!({
-        "message": format!("Received data: Name: {}, Album: {}, Year: {}, Rank: {}", receive_data.name, receive_data.album, receive_data.year, receive_data.rank)
-    }));
-    Ok(response.to_string())
+async fn receive_data(data: Json<Data>) -> Result<String, Status> {
+    let received_data = data.into_inner();
+    //Imprimir en consola el mensaje recibido
+    println!("Received data: Name: {}, Album: {}, Year: {}, Rank: {}", received_data.name, received_data.album, received_data.year, received_data.rank);
+
+    // Llamar a la función produce con los datos recibidos
+    match produce(&received_data).await {
+        Ok(_) => {
+            let response = JsonValue::from(json!({
+                "message": "Data received and sent to Kafka successfully"
+            }));
+            Ok(response.to_string())
+        },
+        Err(e) => {
+            eprintln!("Error while producing message to Kafka: {}", e);
+            Err(Status::InternalServerError)
+        }
+    }
 }
 
 //Funcion main
