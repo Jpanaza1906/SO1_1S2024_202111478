@@ -15,10 +15,18 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 // Connect to MongoDB
-// IP de mongo-svc en el cluster 35.202.221.13
-const ip = '35.202.221.13'
+const ip = '35.202.221.13';
+const dbName = 'so1p2';
+const username = 'jpanaza';
+const password = 'so1p2';
 
-mongoose.connect(`mongodb://${ip}:27017/so1p2`)
+const uri = `mongodb://${username}:${password}@${ip}:27017/${dbName}`;
+
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'Error connecting to MongoDB:'));

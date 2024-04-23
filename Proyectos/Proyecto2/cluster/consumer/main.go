@@ -135,7 +135,8 @@ func insertMongo(ctx context.Context, body string) {
 }
 
 func GetCollection(collectionName string) *mongo.Collection {
-	clientOptions := options.Client().ApplyURI("mongodb://mongo-svc:27017")
+	uri := "mongodb://jpanaza:so1p2@mongo-svc:27017/so1p2"
+	clientOptions := options.Client().ApplyURI(uri)
 	client, err := mongo.Connect(context.Background(), clientOptions)
 	if err != nil {
 		log.Fatal(">>> failed to connect to mongo: ", err)
@@ -144,6 +145,7 @@ func GetCollection(collectionName string) *mongo.Collection {
 	collection := client.Database("so1p2").Collection(collectionName)
 	return collection
 }
+
 
 func main() {
 	ctx := context.Background()
