@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: rust-client-deployment
-        image: jpanaza/so1p2-rust-client:1.0.2
+        image: jpanaza/so1p2-rust-client:1.0.7
         resources:
           limits:
             memory: "128Mi"
@@ -23,7 +23,7 @@ spec:
         ports:
         - containerPort: 8000
       - name: rust-server-deployment
-        image: jpanaza/so1p2-rust-server:latest
+        image: jpanaza/so1p2-rust-server:1.0.1
         resources:
           limits:
             memory: "128Mi"

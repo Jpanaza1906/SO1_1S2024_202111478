@@ -1,0 +1,62 @@
+[
+    {
+        "name": "Bohemian Rhapsody",
+        "album": "A Night at the Opera",
+        "year": "1975",
+        "rank": "1"
+    },
+    {
+        "name": "Hotel California",
+        "album": "Hotel California",
+        "year": "1976",
+        "rank": "2"
+    },
+    {
+        "name": "Stairway to Heaven",
+        "album": "Led Zeppelin IV",
+        "year": "1971",
+        "rank": "3"
+    },
+    {
+        "name": "Imagine",
+        "album": "Imagine",
+        "year": "1971",
+        "rank": "4"
+    },
+    {
+        "name": "Smells Like Teen Spirit",
+        "album": "Nevermind",
+        "year": "1991",
+        "rank": "5"
+    },
+    {
+        "name": "Hey Jude",
+        "album": "The Beatles",
+        "year": "1968",
+        "rank": "6"
+    },
+    {
+        "name": "Like a Rolling Stone",
+        "album": "Highway 61 Revisited",
+        "year": "1965",
+        "rank": "7"
+    },
+    {
+        "name": "I Want to Hold Your Hand",
+        "album": "Meet The Beatles!",
+        "year": "1963",
+        "rank": "8"
+    },
+    {
+        "name": "Yesterday",
+        "album": "Help!",
+        "year": "1965",
+        "rank": "9"
+    },
+    {
+        "name": "Johnny B. Goode",
+        "album": "Chuck Berry Is on Top",
+        "year": "1958",
+        "rank": "10"
+    }
+]
