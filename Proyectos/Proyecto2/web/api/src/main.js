@@ -15,8 +15,8 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 // Connect to MongoDB
-// IP de mongo-svc en el cluster 34.16.29.86
-const ip = '34.16.29.86'
+// IP de mongo-svc en el cluster 35.202.221.13
+const ip = '35.202.221.13'
 
 mongoose.connect(`mongodb://${ip}:27017/so1p2`)
 const db = mongoose.connection;
