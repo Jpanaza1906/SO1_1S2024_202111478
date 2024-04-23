@@ -1,2 +1,2 @@
-backend/apirust/server/target/
-backend/apirust/client/target/
+cluster/apirust/server/target/
+cluster/apirust/client/target/
