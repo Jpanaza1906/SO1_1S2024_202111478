@@ -14,15 +14,15 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: redis-pvc
+  name: redisdb-pvc
   namespace: kafka
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: standard
   resources:
     requests:
       storage: 10Gi
-  storageClassName: standard
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -54,7 +54,7 @@ spec:
       volumes:
         - name: redis-storage
           persistentVolumeClaim:
-            claimName: redis-pvc
+            claimName: redisdb-pvc
 ---
 apiVersion: v1
 kind: Service

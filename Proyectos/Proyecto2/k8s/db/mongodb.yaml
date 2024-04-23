@@ -7,17 +7,19 @@ spec:
     storage: 10Gi
   accessModes:
     - ReadWriteOnce
+  storageClassName: standard
   gcePersistentDisk:
     pdName: mongodb-disk
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mongodb-pvc
+  name: mongo-pvc
   namespace: kafka
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: standard
   resources:
     requests:
       storage: 10Gi
@@ -45,15 +47,14 @@ spec:
         resources:
           limits:
             memory: "200Mi"
-            cpu: "200m"
-            
+            cpu: "200m"    
         volumeMounts:
         - name: mongodb-data
           mountPath: /data/db
       volumes:
         - name: mongodb-data
           persistentVolumeClaim:
-            claimName: mongodb-pvc
+            claimName: mongo-pvc
 ---
 apiVersion: v1
 kind: Service
