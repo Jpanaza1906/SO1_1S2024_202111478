@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: grpc-client-deployment
-        image: jpanaza/so1p2-grpc-client:1.0.0
+        image: jpanaza/so1p2-grpc-client:1.0.1
         ports:
         - containerPort: 3000
         resources:

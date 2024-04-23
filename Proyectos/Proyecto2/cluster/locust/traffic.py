@@ -50,7 +50,7 @@ class trafficData(HttpUser):
         if ( random_data is not None ):
             data_to_send = json.dumps(random_data)
             printDebug(data_to_send)
-            self.client.post("/insert", json=random_data)
+            self.client.post("/grpc/insert", json=random_data)
         else:
             print(">>> Finished sending data")
             self.stop(True)

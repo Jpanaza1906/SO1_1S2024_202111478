@@ -146,7 +146,6 @@ func GetCollection(collectionName string) *mongo.Collection {
 	return collection
 }
 
-
 func main() {
 	ctx := context.Background()
 	consume(ctx)

@@ -1,8 +1,8 @@
 # Usa una imagen base con Node.js y Yarn
-FROM node:21.6.2-alpine
+FROM node:21.6.2-alpine as build
 
 # Establece el directorio de trabajo en /app
-WORKDIR /app
+WORKDIR /usr/local/app
 
 # Copia los archivos de configuración de Yarn
 COPY package.json yarn.lock ./
@@ -16,8 +16,10 @@ COPY . .
 # Compila la aplicación Vue.js
 RUN yarn build
 
-# Exponer el puerto de la aplicación si es necesario (ajusta el puerto según tu aplicación)
-EXPOSE 8080
+FROM nginx:latest
+COPY --from=build /usr/local/app/build /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/nginx.conf
+EXPOSE 80
 
 # Comando para iniciar la aplicación (ajusta según sea necesario)
 CMD ["yarn", "serve"]

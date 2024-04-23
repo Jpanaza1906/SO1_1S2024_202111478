@@ -1,37 +1,32 @@
-# Usa la imagen de Rust como base
+# Usa la imagen oficial de Rust como base
 FROM rust:latest as builder
 
-# Establece el directorio de trabajo dentro del contenedor
+# Crea un directorio de trabajo dentro del contenedor
 WORKDIR /usr/src/app
 
-# Copia el archivo Cargo.toml y el archivo Cargo.lock para permitir la descarga de las dependencias antes de copiar el resto del código
-COPY Cargo.toml Cargo.lock ./
-
-# Descarga las dependencias
-RUN cargo fetch
-
-# Copia el resto del código fuente
-COPY src ./src
+# Copia los archivos de tu aplicación al contenedor
+COPY . .
 
 # Compila la aplicación
 RUN cargo build --release
 
-# Usa una imagen mínima de Alpine como base para reducir el tamaño del contenedor
-FROM alpine:latest
+# Crea una nueva imagen ligera
+FROM ubuntu:latest
 
-# Establece el directorio de trabajo dentro del contenedor
-WORKDIR /usr/src/app
+# Instala las dependencias necesarias
+RUN apt-get update && apt-get install -y libssl-dev
 
-# Copia el binario compilado desde el contenedor de compilación al contenedor de producción
-COPY --from=builder /usr/src/app/target/release/server /server
+# Copia el binario compilado desde la imagen de compilación a la imagen final
+COPY --from=builder /usr/src/app/target/release/server /usr/local/bin/server
 
+# Exponer el puerto que utiliza tu aplicación
 EXPOSE 8080
 
-# Ejecuta la aplicación al iniciar el contenedor
-CMD ["/server/server"]
+# Comando para ejecutar tu aplicación cuando se inicie el contenedor
+CMD ["server"]
 
 
 # Construir la imagen con mi usuario jpanaza y tag:latest
-# docker build -t jpanaza/so1p2-rust-server:latest .
+# docker build -t jpanaza/so1p2-rust-server:2.0.0 .
 # Subir la imagen a Docker Hub
-# docker push jpanaza/so1p2-rust-server:latest
+# docker push jpanaza/so1p2-rust-server:2.0.0

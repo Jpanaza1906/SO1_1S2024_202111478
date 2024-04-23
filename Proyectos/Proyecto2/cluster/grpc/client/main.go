@@ -74,13 +74,13 @@ func sendServer(voto Data) {
 func main() {
 	app := fiber.New()
 
-	app.Get("/", func(c *fiber.Ctx) error {
+	app.Get("/grpc", func(c *fiber.Ctx) error {
 		return c.JSON(fiber.Map{
 			"res": "API is working",
 		})
 	})
 
-	app.Post("/insert", insertData)
+	app.Post("/grpc/insert", insertData)
 
 	err := app.Listen(":3000")
 	if err != nil {

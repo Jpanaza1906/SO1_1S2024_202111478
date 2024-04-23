@@ -23,5 +23,5 @@ EXPOSE 3000
 CMD ["./grpc-client"]
 
 # Build the Docker image
-# docker build -t jpanaza/so1p2-grpc-client:1.0.0 .
-# docker push jpanaza/so1p2-grpc-client:1.0.0
+# docker build -t jpanaza/so1p2-grpc-client:1.0.1 .
+# docker push jpanaza/so1p2-grpc-client:1.0.1

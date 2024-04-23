@@ -15,7 +15,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 // Connect to MongoDB
-const ip = '35.202.221.13';
+const ip = '34.172.114.76';
 const dbName = 'so1p2';
 const username = 'jpanaza';
 const password = 'so1p2';

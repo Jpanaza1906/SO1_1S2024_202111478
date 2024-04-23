@@ -62,7 +62,7 @@ metadata:
   name: redis-svc
   namespace: kafka
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: redis-db
   ports:

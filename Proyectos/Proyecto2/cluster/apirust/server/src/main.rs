@@ -1,6 +1,8 @@
 //Importaciones
 use rocket::serde::json::{json, Value as JsonValue};
 use rocket::serde::json::Json;
+use rocket::config::SecretKey;
+use rocket_cors::{AllowedOrigins, CorsOptions};
 use rocket::http::Status;
 
 use std::time::Duration;
@@ -20,7 +22,7 @@ struct Data {
 async fn produce(data: &Data) -> Result<(), Box<dyn std::error::Error>> {
     // Configurar la dirección del broker y el nombre del tema Kafka
     let broker_address = "my-cluster-kafka-bootstrap:9092";
-    let kafka_topic = "topic_sopes1";
+    let kafka_topic = "topic-sopes1";
     
     // Configurar el cliente Kafka
     let producer: FutureProducer = ClientConfig::new()
@@ -73,8 +75,18 @@ async fn receive_data(data: Json<Data>) -> Result<String, Status> {
 //Funcion main
 #[rocket::main]
 async fn main() {
+    let secret_key = SecretKey::generate();
+
+    // configuracion de opciones CORS
+    let _cors = CorsOptions::default()
+        .allowed_origins(AllowedOrigins::all())
+        .to_cors()
+        .expect("failed to create CORS fairing");
+
     let config = rocket::Config{
+        address : "0.0.0.0".parse().unwrap(),
         port : 8080,
+        secret_key : secret_key.unwrap(),
         ..rocket::Config::default()
     };
     rocket::custom(config)
