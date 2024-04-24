@@ -1,5 +1,6 @@
 import json
 from random import randrange
+import random
 from locust import HttpUser, between, task
 
 debug = False
@@ -50,9 +51,16 @@ class trafficData(HttpUser):
         if ( random_data is not None ):
             data_to_send = json.dumps(random_data)
             printDebug(data_to_send)
-            self.client.post("/grpc/insert", json=random_data)
+            #self.client.post("/grpc/insert", json=random_data)
+            #self.client.post("/rust/send_data", json=random_data)
+            
+            #Elegir aleatoriamente entre las 2 rutas
+            route = random.choice(["/grpc/insert", "/rust/send_data"])
+            self.client.post(route, json=random_data)
+            
         else:
             print(">>> Finished sending data")
             self.stop(True)
             
 #locust -f traffic.py
+#Ingress = 34.29.26.106
