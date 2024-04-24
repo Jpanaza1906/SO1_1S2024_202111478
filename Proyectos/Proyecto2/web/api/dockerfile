@@ -4,12 +4,11 @@ FROM node:21.6.2-alpine
 # Establece el directorio de trabajo en /app
 WORKDIR /app
 
-# Copia los archivos de la aplicación
-COPY package.json package-lock.json ./
-RUN npm install --production
-
 # Copia el resto de los archivos de la aplicación
 COPY . .
+
+RUN npm install --production
+
 
 # Expone el puerto en el que corre la API (ajusta según sea necesario)
 EXPOSE 5000
@@ -18,6 +17,6 @@ EXPOSE 5000
 CMD ["node", "src/main.js"]
 
 # Construye la imagen con el comando:
-# docker build -t jpanaza/so1p2-web-api:1.0.1 .
+# docker build --no-cache=true -t jpanaza/so1p2-web-api:2.0.0 .
 # Sube la imagen a Docker Hub con el comando:
-# docker push jpanaza/so1p2-web-api:1.0.1
+# docker push jpanaza/so1p2-web-api:2.0.0

@@ -40,3 +40,14 @@ kubectl create -f 'https://strimzi.io/install/latest?namespace=kafka' -n kafka
 kubectl apply -f https://strimzi.io/examples/latest/kafka/kafka-persistent-single.yaml -n kafka
 
 ```
+
+### Direcciones de CLOUD RUN
+
+```
+FRONTEND
+https://so1p2-webfront-7fugfcr5eq-uc.a.run.app
+
+BACKEND
+https://so1p2-webapi-7fugfcr5eq-uc.a.run.app
+
+```

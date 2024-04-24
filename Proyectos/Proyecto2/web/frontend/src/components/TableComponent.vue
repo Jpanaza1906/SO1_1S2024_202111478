@@ -43,7 +43,7 @@ export default {
     methods: {
         // Método para consultar el endpoint y actualizar los logs
         fetchLogs() {
-            fetch('http://localhost:5000/logs') // Cambia la URL según tu endpoint
+            fetch('https://so1p2-webapi-7fugfcr5eq-uc.a.run.app/api/logs') // Cambia la URL según tu endpoint
                 .then(response => response.json())
                 .then(data => {
                     this.logs = data; // Actualiza los logs con los datos obtenidos del endpoint

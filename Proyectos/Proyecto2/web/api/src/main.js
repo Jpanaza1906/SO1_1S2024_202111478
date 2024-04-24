@@ -42,8 +42,13 @@ const Band = mongoose.model('bands', {
     date: Date
 });
 
+// Rouute with nothing
+app.get('/api', (req, res) => {
+    res.send('Hello World');
+});
+
 // Routes
-app.get('/logs', async (req, res) => {
+app.get('/api/logs', async (req, res) => {
     try {
         const logs = await Band.find().sort({date: -1}).limit(20);
         res.json(logs);
