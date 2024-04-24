@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana-deployment
+  namespace: kafka
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana-deployment
+  template:
+    metadata:
+      name: grafana-deployment
+      labels:
+        app: grafana-deployment
+    spec:
+      containers:
+      - name: grafana-deployment
+        image: grafana/grafana:8.4.4
+        resources:
+          requests:
+            memory: "200Mi"
+            cpu: "200m"
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana-svc
+  namespace: kafka
+spec:
+  selector:
+    app: grafana-deployment
+  ports:
+  - port: 3000
+    targetPort: 3000
+
+#jpanaza password for grafana, dockerusername:password

@@ -70,40 +70,30 @@ func insertRedis(jsonData string) error {
 	var data Data
 	json.Unmarshal([]byte(jsonData), &data)
 
-	// Convertir mi objeto Data a DataCont
-	dataCont := DataCont{
-		Name:     data.Name,
-		Album:    data.Album,
-		Year:     data.Year,
-		Rank:     data.Rank,
-		Cantidad: "1",
+	// Incrementar el contador total
+	ctx := context.Background()
+	err := goRedisClient.Incr(ctx, "total").Err()
+	if err != nil {
+		log.Fatal(">>> failed to increment total counter: ", err)
 	}
 
-	// Consultar en redis si ya existe el objeto con key data.Rank
+	// Crear la clave según el formato especificado
+	key := fmt.Sprintf("%s (%s) - (%s) : No:%s", data.Album, data.Year, data.Name, data.Rank)
 
-	ctx := context.Background()
+	// Consultar en Redis si ya existe un contador para la clave
+	val, err := goRedisClient.HGet(ctx, "bands", key).Result()
 
-	val, err := goRedisClient.Get(ctx, data.Rank).Result()
-
-	// Si no existe, insertar el objeto con key data.Rank
 	if err == redis.Nil {
-		jsonData, _ := json.Marshal(dataCont)
-		err := goRedisClient.Set(ctx, data.Rank, jsonData, 0).Err()
+		// Si no existe, insertar un nuevo contador para la clave
+		err := goRedisClient.HSet(ctx, "bands", key, 1).Err()
 		if err != nil {
 			log.Fatal(">>> failed to insert document: ", err)
 		}
 	} else {
-		// Si ya existe, incrementar la cantidad
-		var dataCont DataCont
-		json.Unmarshal([]byte(val), &dataCont)
-
-		// Convertir el valor a int , sumarle 1 y convertirlo a string
-		cantidad, _ := strconv.Atoi(dataCont.Cantidad)
-		cantidad++
-		dataCont.Cantidad = strconv.Itoa(cantidad)
-
-		jsonData, _ := json.Marshal(dataCont)
-		err := goRedisClient.Set(ctx, data.Rank, jsonData, 0).Err()
+		// Si ya existe, incrementar el contador
+		count, _ := strconv.Atoi(val)
+		count++
+		err := goRedisClient.HSet(ctx, "bands", key, count).Err()
 		if err != nil {
 			log.Fatal(">>> failed to insert document: ", err)
 		}

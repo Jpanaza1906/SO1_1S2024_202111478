@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: consumer-deployment
-        image: jpanaza/so1p2-consumer:1.0.5
+        image: jpanaza/so1p2-consumer:1.0.7
         resources:
           limits:
             memory: "128Mi"

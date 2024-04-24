@@ -21,5 +21,5 @@ CMD ["./consumer"]
 
 #Comandos para generar la imagen
 
-#docker build -t jpanaza/so1p2-consumer:1.0.5 .
-#docker push jpanaza/so1p2-consumer:1.0.5
+#docker build -t jpanaza/so1p2-consumer:1.0.7 .
+#docker push jpanaza/so1p2-consumer:1.0.7
