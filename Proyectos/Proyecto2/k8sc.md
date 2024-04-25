@@ -44,6 +44,9 @@ kubectl apply -f https://strimzi.io/examples/latest/kafka/kafka-persistent-singl
 ### Direcciones de CLOUD RUN
 
 ```
+INGRESS
+http://34.29.26.106
+
 FRONTEND
 https://so1p2-webfront-7fugfcr5eq-uc.a.run.app
 
