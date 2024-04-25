@@ -18,4 +18,4 @@
 ## Proyectos
 
 [Proyecto 1](/Proyectos/Proyecto1/manualTecnico.md)
-
+[Proyecto 2](/Proyectos/Proyecto2/manual_tecnico.md)
