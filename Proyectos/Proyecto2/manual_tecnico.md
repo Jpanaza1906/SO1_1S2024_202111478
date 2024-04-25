@@ -131,11 +131,27 @@ Aqui se tiene los servicios para poder comunicar los servicios entre el cluster.
 
 ### Conclusiones
 
-Conclusiones:
-
 1. Integración de tecnologías modernas: El proyecto demuestra la capacidad de integrar una variedad de tecnologías modernas y escalables, como Kubernetes, Kafka, GRPC y Redis, para construir un sistema robusto y eficiente para la gestión de votaciones en un concurso de bandas de música guatemalteca. Esta integración permite aprovechar las ventajas individuales de cada tecnología y garantizar un funcionamiento fluido y confiable del sistema en su conjunto.
 
 2. Enfoque en la escalabilidad y el rendimiento: La arquitectura del proyecto está diseñada para ser altamente escalable y tolerante a fallos, lo que permite manejar grandes volúmenes de datos y responder eficientemente a picos de carga durante el proceso de votación. La utilización de servicios como Kubernetes y Cloud Run, junto con tecnologías como Kafka y Redis, proporciona una infraestructura flexible y adaptable que puede crecer según las necesidades del concurso y los usuarios.
 
 3. Experiencia de usuario en tiempo real: El desarrollo de un frontend en Vue.js y la integración con Grafana permiten ofrecer a los usuarios una experiencia visualmente enriquecedora y en tiempo real. Los usuarios pueden monitorear el progreso del concurso, consultar los registros de actividad y visualizar datos estadísticos relevantes de manera intuitiva y accesible. Esto contribuye a mejorar la participación y la satisfacción de los usuarios durante el proceso de votación y promueve una mayor interacción con el concurso de bandas de música guatemalteca.
+
+
+### Comparacion de servicios
+
+El tema de la velocidad es sumamente importante cuando se trabaja con aplicaciones, cuando uno desarrolla las aplicaciones quiere optimizar el codigo de tal manera que sea más veloz el servicio. 
+
+El servicio que se tardó menos fue grpc, esto se debe a que su manera de suscripción entre el cliente y servidor es de manera más directa que una api. Es por ello que rust se tarda más.
+
+Utilizaría GRPC cuando se trabaja con un gran volumen de datos, ya que por su velocidad, este se tardaría menos.
+
+Utilizar RUST cuando no es un gran volumen de datos, ya que es más portable y ocupa menos espacio de memoria y recursos de cpu.
+
+![alt text](./zimg/imagef.png)
+
+
+tipos de servicio: ClusterIP, loadbalancer, nodeport
+Que es kubernetes: orquestador de contenedores
+
 </div>
