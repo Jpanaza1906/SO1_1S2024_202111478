@@ -46,7 +46,7 @@ spec:
         - containerPort: 27017
         resources:
           limits:
-            memory: "200Mi"
+            memory: "400Mi"
             cpu: "200m"    
         volumeMounts:
         - name: mongodb-data
